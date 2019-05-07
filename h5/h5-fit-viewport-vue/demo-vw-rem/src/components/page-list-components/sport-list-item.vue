@@ -4,15 +4,18 @@
       <ul class="game-list">
         <li class="group-info">05-06</li>
         <li class="game-item">
-          <a href="#" class="detail-url">
+          <a href="#"
+             class="detail-url">
             <div class="game-desc">英超第三轮</div>
             <div class="game-info">
               <div class="left">
-                <img src="http://mat1.gtimg.com/sports/logo/yingchao/afd.png" alt>
+                <img src="http://mat1.gtimg.com/sports/logo/yingchao/afd.png"
+                     alt>
                 <h3>埃弗顿</h3>
               </div>
               <div class="right">
-                <img src="http://mat1.gtimg.com/sports/logo/yingchao/afd.png" alt>
+                <img src="http://mat1.gtimg.com/sports/logo/yingchao/afd.png"
+                     alt>
                 <h3>埃弗顿</h3>
               </div>
               <div class="game-status">
@@ -32,10 +35,10 @@
 
 <style lang="scss" scoped>
 .game-list .group-info {
-  height: 25px;
-  padding-left: 10px;
-  font-size: 12px;
-  line-height: 25px;
+  height: rem(25);
+  padding-left: rem(10);
+  font-size: rem(12);
+  line-height: rem(25);
   color: #666;
   background-color: #ebf0f5;
 }
