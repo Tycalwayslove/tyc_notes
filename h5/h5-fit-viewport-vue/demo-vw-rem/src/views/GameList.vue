@@ -1,9 +1,10 @@
 <!-- 游戏列表 -->
 <template>
   <div class="game">
-    <fix-header></fix-header>
-    <sport-list-item v-for='item in 20'
-                     :key='item'></sport-list-item>
+    <fix-header v-model="show"></fix-header>
+
+    <sport-list-item v-for="item in 5" :key="item"></sport-list-item>
+    <button @click="show= !show">点击出现header</button>
   </div>
 </template>
 
@@ -17,7 +18,8 @@ export default {
 
   data() {
     return {
-      data: {}
+      data: {},
+      show: true
     };
   },
   async mounted() {
