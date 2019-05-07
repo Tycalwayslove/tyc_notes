@@ -1,0 +1,27 @@
+// 常用的一些css
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+// 1px 线
+.px-bottom {
+  position: relative;
+  &::after {
+    // 实现1物理像素的下边框线
+    content: '';
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+    background-color: #ddd;
+    height: 1px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+      -webkit-transform: scaleY(0.5);
+      -webkit-transform-origin: 50% 0%;
+    }
+  }
+}
