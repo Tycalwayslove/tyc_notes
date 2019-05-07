@@ -32,7 +32,6 @@ module.exports = {
         .end();
     });
     config.resolve.alias
-      .set("@common", resolve("src/common"))
       .set("@store", resolve("src/store"))
       .set("@components", resolve("src/components"))
       .set("@mixins", resolve("src/mixins"))
