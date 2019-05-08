@@ -53,6 +53,7 @@ export default {
   width: 100%;
   height: auto;
   min-width: 310px;
+  max-width: 540px;
   min-height: rem(44);
   margin: 0;
   padding: 0;
