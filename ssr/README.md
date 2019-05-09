@@ -4,6 +4,7 @@
 
 ## 学习步骤：
 
+- vue 官方例子 [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0)
 - 纯浏览器渲染 (01-onlyClient)
 - 服务端渲染，不包含 Ajax 初始化数据
 - 服务端渲染，包含 Ajax 初始化数据
