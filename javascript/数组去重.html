@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>数组去重</title>
+  </head>
+  <body>
+    <script>
+      var array = [1, 1, "1", "1", 2, 3];
+      // 双层循环去重
+      // function unique1(arr) {
+      //   var res = [];
+      //   for (var i = 0; i < array.length; i++) {
+      //     for (var j = 0; j < res.length; j++) {
+      //       if (array[i] === res[j]) {
+      //         break;
+      //       }
+      //     }
+      //     if (j === res.length) {
+      //       res.push(array[i]);
+      //     }
+      // return res;
+      //   }
+      // }
+      // 利用indexOf
+      // function unique2(arr) {
+      //   var res = [];
+      //   for (var i = 0; i < array.length; i++) {
+      //     var current = array[i];
+      //     if (res.indexOf(current) === -1) {
+      //       res.push(current);
+      //     }
+      //   }
+      //   return res;
+      // }
+      // 排序后去重
+      // function unique3(arr) {
+      //   var res = [];
+      //   var sortedArray = array.concat().sort();
+      //   var seen;
+      //   for (var i = 0; i < array.length; i++) {
+      //     if (!i || seen !== sortedArray[i]) {
+      //       res.push(sortedArray[i]);
+      //     }
+      //     seen = sortedArray[i];
+      //   }
+      //   return res;
+      // }
+      // 使用filter;
+
+      function unique4(arr) {
+        var res = array.filter(function(item, index, array) {
+          console.log(item);
+          console.log(index);
+          console.log(array);
+          return array.indexOf(item) === index;
+        });
+        return res;
+      }
+      console.log(unique4(array));
+    </script>
+  </body>
+</html>

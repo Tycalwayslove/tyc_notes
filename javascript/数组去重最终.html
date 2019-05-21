@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>数组去重</title>
+  </head>
+  <body>
+    <script>
+      var arr = [1, 1, "1", "1", 2, 3];
+      //  1.双层循环
+      function unique1(arr) {
+        let res = [];
+        for (var i = 0; i < arr.length; i++) {
+          for (var j = 0; j < res.length; j++) {
+            if (arr[i] === res[j]) {
+              break;
+            }
+          }
+
+          if (j === res.length) {
+            res.push(arr[i]);
+          }
+        }
+        return res;
+      }
+
+      //  2.一层循环里面使用indexOf
+      //     .普通for 循环
+      function unique2(arr) {
+        let res = [];
+        for (var i = 0; i < arr.length; i++) {
+          let current = arr[i];
+          if (res.indexOf(current) === -1) {
+            res.push(current);
+          }
+        }
+        return res;
+      }
+      //     . filter
+      function unique3(arr) {
+        var res = arr.filter((item, index, array) => {
+          return array.indexOf(item) === index;
+        });
+        return res;
+      }
+      // es set
+      var unique4 = a => [...new Set(arr)];
+      console.log(unique3(arr));
+      //map
+      // 排序后然后再去重
+    </script>
+  </body>
+</html>

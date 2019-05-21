@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>数组去重</title>
+  </head>
+  <body>
+    <script>
+      //  浅拷贝
+      var shallowCopy = function(obj) {
+        // 首先,如果不是对象,直接放回
+        if (typeof obj !== "object") return;
+        // 根据obj 的类型判断是新建一个对象还是数组
+        var newObj = obj instanceof Array ? [] : {};
+        // 遍历obj,并且判断是obj 的属性才拷贝
+        for (var key in obj) {
+          if (obj.hasOwnProperty(key)) {
+            newObj[key] = obj[key];
+          }
+        }
+        return newObj;
+      };
+      var obj = {
+        name: "tangyouchao",
+        age: 23
+      };
+      var arr = [12, 3, 4, 4];
+      // shallowCopy(obj);
+      console.log(shallowCopy(obj));
+      console.log(shallowCopy(arr));
+    </script>
+  </body>
+</html>

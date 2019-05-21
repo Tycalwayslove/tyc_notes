@@ -1,8 +1,12 @@
 <template>
   <div id="app">
-    <router-view />
+    <h1>{{$kkbrouter}}</h1>
+    <router-view/>
   </div>
 </template>
+<script>
+export default {};
+</script>
 
 <style lang="scss">
 #app {
