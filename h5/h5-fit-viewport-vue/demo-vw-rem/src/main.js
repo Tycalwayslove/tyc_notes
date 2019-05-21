@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 
 import router from "./router";
-import krouter from "./kkb-router/index";
+import Krouter from "./kkb-router/index";
 import store from "./store";
 import "@/assets/css/index.scss";
 // import "normalize.css";
