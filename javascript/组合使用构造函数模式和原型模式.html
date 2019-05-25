@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>组合使用构造函数模式和原型模式</title>
+  </head>
+  <body>
+    <script>
+      // 组合使用构造函数模式和原型模式的原因为：
+      // 构造函数是定义实例自身的属性
+      // 原型模式主要定义方法和共享属性
+      // 当二者相加，则每个实例既拥有自己独有的属性，又共享着对方法的引用，最大限度的节约了内存，而且可以解决原型模式中无法传参的问题。
+      function Person(name, age, job) {
+        this.name = name;
+        this.age = age;
+        this.job = job;
+        this.friend = ["Bob", "mark"];
+      }
+      Person.prototype = {
+        constructor: Person,
+        sayName: function() {
+          console.log(this.name);
+        }
+      };
+      var person1 = new Person("tyc", 23, "web");
+      var person2 = new Person("tycc", 24, "teacher");
+      person1.friend.push("jeck");
+      console.log(person1.friend);
+      console.log(person2.friend);
+      console.log(person1);
+      console.log(person2);
+    </script>
+  </body>
+</html>
