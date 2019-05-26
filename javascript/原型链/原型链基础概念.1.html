@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>原型链的基础</title>
+  </head>
+  <body>
+    <script>
+      function SuperType() {
+        this.property = true;
+      }
+      SuperType.prototype.getSuperValue = function() {
+        return this.property;
+      };
+      function SubType() {
+        this.subproperty = false;
+      }
+      SubType.prototype = new SuperType();
+      SubType.prototype.getSubValue = function() {
+        return thsi.subproperty;
+      };
+      var instance = new SubType();
+      // console.log(instance.getSuperValue());
+      // console.log(instance);
+      // console.log(instance.constructor);
+      console.log(instance instanceof SuperType);
+      console.log(instance instanceof SubType);
+      console.log(instance instanceof Object);
+      console.log(instance);
+      console.log(SuperType.prototype.isPrototypeOf(instance));
+      // 检测某个变量为对象
+      function isaObject(obj) {
+        return Object.prototype.toString.call(obj) === "[object Object]";
+      }
+    </script>
+  </body>
+</html>
