@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>闭包</title>
+  </head>
+  <body>
+    <button>改变段落一颜色</button>
+    <p>段落一</p>
+    <button>改变段落二颜色</button>
+    <p>段落二</p>
+    <button>改变段落三颜色</button>
+    <p>段落三</p>
+    <button>改变段落四颜色</button>
+    <p>段落四</p>
+    <button>改变段落五颜色</button>
+
+    <script>
+      var Element = document.getElementsByTagName("button");
+      for (var i = 0; i < Element.length; i++) {
+        (function(i) {
+          Element[i].onclick = function() {
+            console.log(i);
+          };
+        })(i);
+      }
+    </script>
+  </body>
+</html>

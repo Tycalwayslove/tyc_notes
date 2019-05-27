@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>内存泄漏</title>
+  </head>
+  <body>
+    <script>
+      function CreateElement() {
+        var Element = document.getElementById("demo");
+        Element.onclick = function() {
+          // 引用了父对象的Element 变量，导致无法减少Element 的引用数。且引用数最少都是1.因此，导致内存不会回收。
+
+          console.log(element.id);
+        };
+      }
+      // 改写
+      function CreateElement2() {
+        var Element = document.getElementById("demo");
+        // 此处先存一个id副本
+        var id = Element.id;
+
+        Element.onclick = function() {
+          console.log(id);
+        };
+        Element = null;
+      }
+    </script>
+  </body>
+</html>
