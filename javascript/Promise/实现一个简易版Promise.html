@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>实现一个简易版Promise</title>
+  </head>
+  <body>
+    <script>
+      const PENDING = "pending";
+      const RESOLVE = "resolve";
+      const REJECT = "reject"; //常量表示状态
+      function MyPromise(fn) {
+        const that = this; // 解决异步执行时正确获取this
+        that.state = PENDING; // 开始promise 的状态
+        that.value = null; //value 作为保存reslove或者reject 传入的值
+        that.resolvedCallbacks = []; //resolve 中then 的回调
+        this.rejectedCallbacks = [];
+        // 完善resolve /reject 函数
+        function resolve(value) {
+          if (that.state === PENDING) {
+            that.state = RESOLVE;
+            that.value = value;
+            that.resolvedCallbacks.map(cb => cb(that.value));
+          }
+        }
+        function reject(value) {
+          if (that.state === PENDING) {
+            that.state = REJECT;
+            that.value = value;
+            that.rejectedCallbacks.map(cb => cb(that.value));
+          }
+        }
+
+        // 执行fn 函数
+        try {
+          fn(resolve, reject);
+        } catch (e) {
+          reject(e);
+        }
+      }
+      MyPromise.prototype.then = function(onFulfilled, onRejected) {
+        const that = this;
+        // 首先判断两个参数是否为函数类型，因为这两个参数是可选参数
+        onFulfilled = typeof onFulfilled === "function" ? onFulfilled : v => v;
+        onRejected =
+          typeof onRejected === "function"
+            ? onRejected
+            : r => {
+                throw r;
+              };
+        if (that.state === PENDING) {
+          that.resolvedCallbacks.push(onFulfilled);
+          that.rejectedCallbacks.push(onRejected);
+        }
+        if (that.state === RESOLVE) {
+          onFulfilled(that.value);
+        }
+        if (that.state === REJECT) {
+          onRejected(that.value);
+        }
+      };
+
+      // 使用
+      new MyPromise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(1);
+        }, 0);
+      }).then(value => {
+        console.log(value);
+      });
+    </script>
+  </body>
+</html>

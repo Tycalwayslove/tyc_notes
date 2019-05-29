@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>实现一个简易版Promise</title>
+  </head>
+  <body>
+    <script>
+      const PENDING = "pending";
+      const RESOLVE = "resolve";
+      const REJECT = "reject";
+      // 写一个构造函数MyPromise
+      function MyPromise(fn) {
+        // 属性
+        // 1.that  | 正确绑定this
+        const that = this;
+        // 2.state | promise 状态
+        that.state = PENDING;
+        // 3.value | 传给resolve，reject的值
+        that.value = null;
+        // 4.resolvedCallbacks | 数组 ： resolve回调
+        that.resolvedCallbacks = [];
+        // 5.rejectedCallbacks | 数组 ： reject
+        that.rejectedCallbacks = [];
+        // resolve 函数
+        function resolve(value) {
+          if (that.state === PENDING) {
+            that.value = value;
+            that.resolvedCallbacks.map(cb => cb(that.value));
+            that.state = RESOLVE;
+          }
+        }
+        // reject 函数
+        function reject(value) {
+          if (that.state === PENDING) {
+            that.value = value;
+            that.rejectedCallbacks.map(cb => cb(that.value));
+            that.state = REJECT;
+          }
+        }
+
+        //运行fn
+        try {
+          fn(resolve, reject);
+        } catch (e) {
+          reject(e);
+        }
+      }
+      // then 有两个回调函数
+      // onfulfilled | onrejected
+      MyPromise.prototype.then = function(onfulfilled, onrejected) {
+        // 首先要判断他是不是函数体,如果不是,就创建一个函数,并且赋值给他.
+        const that = this;
+        onfulfilled = typeof onfulfilled === "function" ? onfulfilled : v => v;
+        onrejected =
+          typeof onrejected === "function"
+            ? onrejected
+            : r => {
+                throw r;
+              };
+        // 接着根据状态来进行判断
+        if (that.state === PENDING) {
+          that.resolvedCallbacks.push(onfulfilled);
+          that.rejectedCallbacks.push(onrejected);
+        }
+        if (that.state === RESOLVE) {
+          onfulfilled(that.value);
+        }
+        if (that.state === REJECT) {
+          onrejected(that.value);
+        }
+      };
+      new MyPromise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(1);
+        }, 2000);
+      }).then(value => {
+        console.log(value);
+      });
+    </script>
+  </body>
+</html>

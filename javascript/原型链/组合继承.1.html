@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>组合继承</title>
+  </head>
+  <body>
+    <script>
+      function Parent(value) {
+        this.value = value;
+      }
+      Parent.prototype.getValue = function() {
+        console.log(this.value);
+      };
+      function Child(value) {
+        Parent.call(this, value);
+      }
+      Child.prototype = Object.create(Parent.prototype, {
+        constructor: {
+          configurable: true,
+          enumerable: true,
+          writerable: true,
+          value: Child
+        }
+      });
+      const child1 = new Child(1);
+      child1.getValue();
+      console.log(child1);
+    </script>
+  </body>
+</html>
